@@ -44,7 +44,14 @@ export function GameConsole({ compact = false }: { compact?: boolean }) {
   const menu = ['demo','paused','gameover','victory'].includes(snapshot.status);
   const setMode = (mode: DisplayMode) => { saveSettings({ displayMode: mode }); };
   const toggleAudio = () => { const enabled = !settings.audioEnabled; saveSettings({ audioEnabled: enabled }); engine.current?.setAudio(enabled); };
+  const requestFullscreen = () => {
+    if (!compact && !document.fullscreenElement) {
+      const request = document.documentElement.requestFullscreen?.();
+      if (request) void request.catch(() => undefined);
+    }
+  };
   const start = () => {
+    requestFullscreen();
     if (compact && viewport !== 'desktop') { launch(); return; }
     engine.current?.start();
   };
