@@ -1,4 +1,6 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# space-impact-2
+
+IMPACT_01 is a premium retro-futurist landing page with a playable monochrome space shooter.
 
 ## Getting Started
 
@@ -14,7 +16,11 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to enter the system. Select PLAY NOW or launch the live hero terminal preview.
+
+Controls: WASD / arrow keys to move, Space to fire, X or Shift for EMP, Escape to pause. Touch controls appear on small screens.
+
+The game is an original Canvas simulation with programmatic sprites, local high score/settings, optional generated audio, three display modes, enemy waves, and a multi-core boss.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
