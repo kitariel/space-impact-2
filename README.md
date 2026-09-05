@@ -26,6 +26,21 @@ Mobile browser checks (Chromium and WebKit): run `npx playwright install chromiu
 
 The game is an original Canvas simulation with programmatic sprites, local high score/settings, optional generated audio, three display modes, enemy waves, and a multi-core boss.
 
+## GitHub Pages deployment
+
+The repository includes `.github/workflows/deploy-pages.yml`. It builds Next.js as a static export and publishes it with GitHub Pages. In GitHub, open **Settings → Pages**, choose **GitHub Actions** as the source, then push to `main` or run **Deploy IMPACT_01 to GitHub Pages** from the Actions tab. The project site will be `https://kitariel.github.io/space-impact-2/` after the first successful run. GitHub Pages supports static files and custom Actions workflows; this app does not require a server. ([GitHub Pages docs](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages), [Next.js static export docs](https://nextjs.org/docs/app/guides/static-exports))
+
+## Protecting `main`
+
+The current remote is a public repository and is **not a fork**. GitHub does not provide a supported way to convert an existing repository into a fork after creation; a fork must be created from another repository. If “fork only” means that nobody should edit the deployed branch directly, configure that with a branch rule:
+
+1. Open **Settings → Rules → Rulesets → New branch ruleset**.
+2. Name it `protect-main`, set enforcement to **Active**, and target the `main` branch.
+3. Enable **Require a pull request before merging** and require at least one approval. Enable **Require status checks** and select the `build` check after its first run.
+4. Enable **Block force pushes** and **Restrict deletions**. Leave bypass actors empty unless you want a specific maintainer to merge.
+
+For a simpler repository rule, use **Settings → Branches → Add classic branch protection rule**, enter `main`, and enable pull requests, approvals, status checks, force-push blocking, and deletion blocking. Only repository administrators can change these settings. Branch rulesets are the current GitHub approach. ([Rulesets API/docs](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets))
+
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.

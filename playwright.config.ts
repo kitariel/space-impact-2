@@ -13,7 +13,7 @@ export default defineConfig({
   ],
   use: { baseURL, screenshot: 'only-on-failure', trace: 'retain-on-failure' },
   webServer: process.env.IMPACT_TEST_URL ? undefined : {
-    command: 'npm run start -- --port 3102',
+    command: 'npm run dev -- --port 3102',
     url: baseURL,
     reuseExistingServer: !process.env.CI,
   },
