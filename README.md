@@ -18,7 +18,11 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) to enter the system. Select PLAY NOW or launch the live hero terminal preview.
 
-Controls: WASD / arrow keys to move, Space to fire, X or Shift for EMP, Escape to pause. Touch controls appear on small screens.
+Controls: WASD / arrow keys to move, Space to fire, X or Shift for EMP, Escape to pause. Touch controls are available on phones and tablets in either orientation.
+
+On touch devices, the flight terminal recommends landscape and also offers portrait play. Rotating during a mission pauses the same run and releases held controls; press Resume when ready. The landing-page preview opens the dedicated flight terminal on touch devices.
+
+Mobile browser checks (Chromium and WebKit): run `npx playwright install chromium webkit`, `npm run build`, then `npm run test:mobile`. To test an existing local server instead, set `IMPACT_TEST_URL=http://localhost:3001`.
 
 The game is an original Canvas simulation with programmatic sprites, local high score/settings, optional generated audio, three display modes, enemy waves, and a multi-core boss.
 

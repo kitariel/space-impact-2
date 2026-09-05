@@ -16,6 +16,7 @@ export class GameEngine {
   private lastSnapshot = 0;
   private visible = true;
   private alive = true;
+  private orientationBlocked = false;
   private observer: IntersectionObserver;
   private motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
   private fps = 60;
@@ -59,12 +60,13 @@ export class GameEngine {
     } else this.accumulator = 0;
     this.raf = requestAnimationFrame(this.frame);
   };
-  private emit() { this.input.enabled = ['playing','paused'].includes(this.world.status); this.onSnapshot(this.world.snapshot(Math.min(120, Math.round(this.fps)))); }
-  start() { this.world.reset(false); this.accumulator = 0; this.last = 0; this.input.clear(); this.input.enabled = true; this.audio.unlock(); this.canvas.focus({ preventScroll: true }); this.emit(); }
+  private emit() { this.input.enabled = !this.orientationBlocked && ['playing','paused'].includes(this.world.status); this.onSnapshot(this.world.snapshot(Math.min(120, Math.round(this.fps)))); }
+  start() { if (this.orientationBlocked) return; this.world.reset(false); this.accumulator = 0; this.last = 0; this.input.clear(); this.input.enabled = true; this.audio.unlock(); this.canvas.focus({ preventScroll: true }); this.emit(); }
   attract() { this.world.reset(true); this.input.clear(); this.input.enabled = false; this.emit(); }
   pause = () => { this.world.pause(); this.input.clear(); this.emit(); };
-  resume() { this.world.resume(); this.input.clear(); this.canvas.focus({ preventScroll: true }); this.emit(); }
+  resume() { if (this.orientationBlocked) return; this.world.resume(); this.input.clear(); this.canvas.focus({ preventScroll: true }); this.emit(); }
   togglePause() { if (this.world.status === 'paused') this.resume(); else this.pause(); }
+  setOrientationBlocked(blocked: boolean) { this.orientationBlocked = blocked; if (blocked) this.pause(); else this.emit(); }
   setDisplay(mode: DisplayMode) { this.renderer.mode = mode; }
   setAudio(enabled: boolean) { this.audio.enabled = enabled; if (enabled) this.audio.unlock(); }
   destroy() {

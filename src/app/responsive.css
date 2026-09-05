@@ -1,0 +1,260 @@
+/* Mobile layouts use document flow; game controls are based on input capability. */
+html { color-scheme: dark; scroll-padding-top: 88px; }
+button, a { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+button:focus-visible, a:focus-visible, canvas:focus-visible { outline: 2px solid var(--bright); outline-offset: 5px; }
+button:disabled { cursor: default; }
+.skip-link { position: fixed; top: 8px; left: 8px; padding: 12px 16px; background: var(--green); color: var(--bg); transform: translateY(-180%); z-index: 50; }
+.skip-link:focus { transform: none; }
+.nav-inner > .launch-button { justify-self: end; }
+.console-stage[hidden] { display: none; }
+.console-stage { min-width: 0; }
+.touch-controls, .touch-hint { display: none; }
+.assembly-layer svg { stroke: currentColor; stroke-width: 1; }
+.menu-bottom { margin-top: 24px; display: flex; gap: 28px; font: 9px var(--mono); }
+.mode-selector { display: grid; grid-template-columns: repeat(3, 1fr); }
+.mode-selector button { min-width: 0; }
+.preview-help { color: var(--muted); font: 9px/1.6 var(--mono); margin: 12px 0 0; }
+.display-phosphor .lcd-bezel { box-shadow: 0 0 26px #a8cfa421; }
+.display-terminal .game-menu { background: #101d16f5; color: var(--bright); }
+.display-terminal .lcd-button { background: var(--bright); color: var(--ink); }
+.display-terminal .lcd-link { color: var(--bright); }
+.lcd-screen { container-type: inline-size; }
+.game-menu { row-gap: 0; }
+.game-menu h2 { font-size: clamp(24px, 8cqw, 85px); }
+.menu-eyebrow { font-size: clamp(8px, 1.4cqw, 11px); }
+.lcd-button, .lcd-link { min-height: 44px; }
+
+.orientation-prompt {
+  min-height: min(540px, 72svh);
+  padding: 40px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  color: var(--bright);
+}
+.orientation-illustration { position: relative; width: 110px; height: 96px; margin-bottom: 24px; display: grid; place-items: center; }
+.orientation-phone { transform: rotate(-90deg); color: var(--green); }
+.orientation-arrow { position: absolute; top: 0; right: 0; color: var(--muted); }
+.orientation-prompt .eyebrow { color: var(--green); font-size: 9px; line-height: 1.6; }
+.orientation-prompt h2 { margin: 20px 0 18px; font-size: clamp(28px, 7vw, 46px); font-weight: 500; line-height: .98; letter-spacing: -.055em; }
+.orientation-prompt h2 span { color: var(--green); }
+.orientation-prompt p { max-width: 280px; font-size: 16px; line-height: 1.5; }
+.orientation-detail { max-width: 270px; margin-top: 12px; color: var(--muted); font-size: 13px; line-height: 1.6; }
+.orientation-continue { display: flex; align-items: center; justify-content: center; gap: 12px; min-height: 48px; margin-top: 28px; padding: 12px 16px; border: 1px solid var(--green); background: transparent; color: var(--green); font: 10px var(--mono); letter-spacing: .06em; }
+.orientation-continue:active { background: var(--green); color: var(--ink); }
+.orientation-prompt small { margin-top: 18px; max-width: 260px; color: var(--muted); font-size: 11px; line-height: 1.5; }
+
+@media (max-width: 900px) {
+  .site-nav, .site-nav.is-scrolled {
+    padding: calc(12px + env(safe-area-inset-top)) max(20px, env(safe-area-inset-right)) 12px max(20px, env(safe-area-inset-left));
+  }
+  .site-nav .launch-button { min-height: 44px; }
+  .brand { min-height: 44px; }
+  .hero {
+    min-height: 100svh;
+    padding: calc(106px + env(safe-area-inset-top)) 24px 28px;
+  }
+  .hero-inner { min-height: 0; display: flex; flex-direction: column; gap: 32px; }
+  .hero-inner > .hero-meta { font-size: 9px; }
+  .hero-title-block, .device-entrance, .hero-bottom-copy, .hero-footer {
+    position: relative;
+    inset: auto;
+    width: 100%;
+  }
+  .hero-title-block { padding-top: 14px; }
+  .hero-title-block .eyebrow { font-size: 9px; letter-spacing: .1em; margin-bottom: 20px; }
+  .hero h1 { font-size: clamp(54px, 14.8vw, 122px); line-height: .91; }
+  .device-entrance { max-width: 680px; margin: 8px auto 0; transform: none; }
+  .device-float { filter: drop-shadow(0 16px 24px #0008); }
+  .device-tilt { transform: none; }
+  .hero-annotation { display: none; }
+  .hero-bottom-copy { display: flex; flex-direction: column; align-items: flex-start; gap: 22px; padding-top: 4px; }
+  .hero-bottom-copy p { font-size: 16px; line-height: 1.5; }
+  .hero-bottom-copy .launch-button { order: initial; width: 100%; min-height: 54px; justify-content: space-between; margin: 0; }
+  .hero-footer { margin-top: 14px; padding-top: 20px; align-items: center; }
+  .hero-footer a { min-height: 44px; }
+  .section-wrap { padding: 88px 24px; }
+  .section-kicker { font-size: 10px; line-height: 1.6; gap: 24px; }
+  .system-intro, .assembly-grid { grid-template-columns: minmax(0, 1fr); }
+  .system-intro h2, .mission-heading h2 { font-size: clamp(40px, 10vw, 80px); line-height: .98; }
+  .system-copy p, .part-description p, .mission-heading p { font-size: 16px; }
+  .system-stat { padding: 24px; }
+  .stat-detail { font-size: 14px; }
+  .assembly-content h2 { font-size: clamp(48px, 12vw, 86px); line-height: .95; }
+  .assembly-content .part-selector button { min-height: 48px; font-size: 12px; }
+  .mission-space { margin-inline: 0; }
+  .mission-caption h3 { line-height: 1; }
+  .strip-top { font-size: 9px; }
+  .strip-top span:nth-child(2) { display: none; }
+  .strip-world button { min-height: 48px; white-space: nowrap; }
+  .score-grid { grid-template-columns: minmax(0, 1fr); }
+  .high-score { font-size: clamp(70px, 18.4vw, 144px); margin-top: 24px; }
+  .score-note { font-size: 9px; line-height: 1.8; }
+  .footer-top { min-height: 0; display: grid; grid-template-columns: minmax(0, 1fr) 48px; gap: 24px; margin-bottom: 36px; }
+  .footer-top .brand { grid-column: 1; }
+  .footer-top p { grid-column: 1; font-size: 14px; }
+  .back-top { grid-column: 2; grid-row: 1; width: 48px; height: 48px; }
+  .footer-bottom { font-size: 9px; line-height: 1.8; }
+  .site-footer { padding-bottom: calc(28px + env(safe-area-inset-bottom)); }
+  .not-found { padding: calc(24px + env(safe-area-inset-top)) 24px 32px; }
+}
+
+@media (max-width: 560px) {
+  .hero-device { border-radius: 20px; padding: 20px 16px 16px; }
+  .device-display { margin: 16px 0 14px; padding: 5px; }
+  .device-top { gap: 8px; }
+  .device-wordmark { font-size: 8px; white-space: nowrap; }
+  .device-wordmark b { display: none; }
+  .device-top-right { font-size: 8px; gap: 4px; }
+  .device-top-right .status-dot { width: 5px; height: 5px; margin-right: 3px; }
+  .device-model { margin-left: 8px; }
+  .device-designation { font-size: 6px; }
+  .device-designation small { display: none; }
+  .speaker { gap: 3px; }
+  .speaker i { height: 12px; width: 2px; }
+  .device-seal { width: 28px; height: 28px; flex-shrink: 0; }
+  .preview-toolbar { padding-top: 4px; font-size: 7px; letter-spacing: .02em; gap: 4px; }
+  .preview-toolbar > div { gap: 0; flex-shrink: 0; }
+  .preview-toolbar button { display: grid; place-items: center; width: 44px; height: 44px; }
+  .quick-play { left: 50%; right: auto; bottom: 12px; transform: translateX(-50%); min-height: 44px; min-width: 160px; justify-content: center; font-size: 9px; white-space: nowrap; }
+  .quick-live { display: none; }
+  .mission-space { height: auto; display: grid; gap: 32px; padding: 30px 0 52px; }
+  .mission-orbits { opacity: .4; }
+  .mission-node { position: relative; inset: auto; display: grid; grid-template-columns: 110px minmax(0, 1fr); align-items: center; gap: 22px; width: 100%; }
+  .mission-caption { margin: 0; font-size: 9px; }
+  .mission-id { flex-wrap: wrap; gap: 6px 10px; }
+  .mission-caption h3 { font-size: 28px; margin-block: 10px; }
+  .mission-locked .mission-caption h3 { font-size: 22px; }
+  .mission-node .planet { width: 76px; height: 76px; margin: 12px auto; }
+  .mission-node .planet-one { width: 90px; height: 90px; }
+  .mission-coordinate { bottom: 0; font-size: 8px; }
+  .strip-player { left: 12%; }
+  .strip-enemy-three { width: 50px; top: 180px; }
+}
+
+/* Touch devices retain their controls after rotating; no width-only cutoff. */
+@media (any-pointer: coarse) {
+  .play-page {
+    min-height: 100svh;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  }
+  .play-header { min-height: 60px; padding: 8px 20px; }
+  .play-header-status, .play-footer, .keyboard-legend { display: none; }
+  .exit-link { min-height: 44px; padding: 0 8px; }
+  .play-container { width: 100%; padding: 20px 16px 24px; }
+  .play-title { font-size: 9px; align-items: center; }
+  .play-title h1 { font-size: 11px; }
+  .flight-topbar { min-height: 44px; padding: 0; gap: 8px; }
+  .flight-model { font-size: 9px; }
+  .flight-model > span { display: none; }
+  .flight-actions { gap: 4px; }
+  .flight-actions button { min-height: 44px; min-width: 44px; padding: 4px 8px; font-size: 9px; }
+  .flight-actions button:disabled { opacity: .4; }
+  .play-page .lcd-bezel { padding: 5px; border-radius: 7px; }
+  .play-page .lcd-screen { border-width: 2px; }
+  .play-page canvas { touch-action: none; }
+  .play-page .game-menu { padding: 12px; overflow-y: auto; align-content: safe center; }
+  .game-menu .menu-eyebrow { margin-bottom: 10px; }
+  .game-menu .menu-description { display: none; }
+  .game-menu .menu-actions { margin-top: 16px; gap: 8px; flex-direction: row; flex-wrap: wrap; justify-content: center; }
+  .game-menu .lcd-button, .game-menu .lcd-link { font-size: 9px; min-height: 44px; }
+  .game-menu .result-scores { margin-top: 12px; gap: 24px; font-size: 8px; }
+  .game-menu .result-scores strong { font-size: 17px; }
+  .menu-bottom { display: none; }
+  .external-hud { min-height: 36px; align-items: center; padding: 8px 0; font-size: 8px; gap: 8px; }
+  .emp-meter { display: flex; gap: 4px; }
+  .emp-meter i { width: 32px; }
+  .external-hud .weapon-label { display: none; }
+  .flight-bottom { display: flex; flex-wrap: wrap; gap: 12px; padding: 8px 0; }
+  .mode-selector { width: 100%; }
+  .mode-selector button { min-height: 44px; font-size: 9px; }
+  .frame-status { display: none; }
+  .touch-hint { display: block; max-width: 310px; margin: 16px auto 0; color: var(--muted); font: 11px/1.7 var(--sans); text-align: center; }
+  .touch-controls {
+    position: relative;
+    inset: auto;
+    z-index: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    pointer-events: auto;
+    padding: 18px 0;
+    gap: 12px;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .touch-controls .dpad { position: relative; display: grid; grid-template: repeat(3, 44px) / repeat(3, 44px); gap: 2px; width: 136px; height: 136px; flex-shrink: 0; }
+  .touch-controls .dpad button, .touch-controls .dpad-center { position: static; inset: auto; width: 44px; height: 44px; }
+  .touch-controls .dpad-up { grid-column: 2; grid-row: 1; }
+  .touch-controls .dpad-left { grid-column: 1; grid-row: 2; }
+  .touch-controls .dpad-center { grid-column: 2; grid-row: 2; }
+  .touch-controls .dpad-right { grid-column: 3; grid-row: 2; }
+  .touch-controls .dpad-down { grid-column: 2; grid-row: 3; }
+  .touch-controls .dpad-center { display: grid; place-items: center; color: var(--deep); font: 20px var(--mono); }
+  .touch-controls .dpad button, .touch-controls .touch-actions button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    color: var(--green);
+    background: #151e17;
+    border: 1px solid #a8cfa45c;
+    touch-action: none;
+    -webkit-touch-callout: none;
+    border-radius: 5px;
+    transition: background .1s, color .1s;
+  }
+  .touch-controls .touch-actions { display: flex; align-items: center; gap: 10px; }
+  .touch-controls .touch-actions button { width: 72px; height: 72px; border-radius: 50%; font: 9px var(--mono); }
+  .touch-controls .touch-actions .touch-special { width: 58px !important; height: 58px !important; font-size: 7px; }
+  .touch-controls button[data-held=true], .touch-controls button:active:not(:disabled) { color: var(--ink); background: var(--green); }
+  .touch-controls[data-enabled=false] { opacity: .35; }
+  .device-tilt { transform: none !important; }
+}
+
+@media (any-pointer: coarse) and (orientation: landscape) {
+  .play-page { min-height: 100dvh; }
+  .play-header { min-height: 44px; padding: 0 16px; border: 0; }
+  .play-header .brand { font-size: 13px; }
+  .play-container { padding: 0 12px 10px; }
+  .play-title, .touch-hint { display: none; }
+  .is-full .console-stage {
+    --flight-width: min(calc(100vw - 324px - env(safe-area-inset-left) - env(safe-area-inset-right)), calc((100dvh - 178px - env(safe-area-inset-top) - env(safe-area-inset-bottom)) * 16 / 9));
+    display: grid;
+    grid-template-columns: 140px minmax(0, var(--flight-width)) 140px;
+    grid-template-areas: '. toolbar .' 'direction screen actions' '. hud .' '. modes .';
+    gap: 0 10px;
+    align-items: center;
+    justify-content: center;
+  }
+  .console-stage[hidden] { display: none; }
+  .flight-topbar { grid-area: toolbar; min-height: 44px; }
+  .lcd-bezel { grid-area: screen; min-width: 0; }
+  .external-hud { grid-area: hud; min-width: 0; min-height: 22px; padding: 4px 0; font-size: 7px; }
+  .external-hud > span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .emp-meter { flex-shrink: 0; }
+  .flight-bottom { grid-area: modes; min-width: 0; padding: 0; }
+  .mode-selector button { font-size: 8px; padding-inline: 4px; }
+  .touch-controls { display: contents; }
+  .touch-controls .dpad { grid-area: direction; justify-self: center; }
+  .touch-controls .touch-actions { grid-area: actions; justify-self: center; flex-direction: column-reverse; gap: 12px; }
+  .touch-controls[data-enabled=false] > * { opacity: .35; }
+  .flight-actions button span { display: none; }
+  .game-menu .menu-eyebrow { display: none; }
+  .game-menu h2 { font-size: clamp(20px, 7cqw, 54px); }
+  .game-menu .result-scores { margin-top: 8px; }
+  .game-menu .result-scores strong { font-size: 14px; }
+  .game-menu .menu-actions { margin-top: 8px; gap: 4px 12px; }
+  .game-menu .lcd-button, .game-menu .lcd-link { font-size: 8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-cursor { animation: none; }
+  .orientation-phone { animation: none; }
+  .touch-controls button { transition: none; }
+}
