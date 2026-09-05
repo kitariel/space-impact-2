@@ -36,7 +36,7 @@ The current remote is a public repository and is **not a fork**. GitHub does not
 
 1. Open **Settings → Rules → Rulesets → New branch ruleset**.
 2. Name it `protect-main`, set enforcement to **Active**, and target the `main` branch.
-3. Enable **Require a pull request before merging** and require at least one approval. Enable **Require status checks** and select the `build` check after its first run.
+3. Enable **Require a pull request before merging** and require at least one approval. Enable **Require status checks** and select `Deploy IMPACT_01 to GitHub Pages / build` after its first pull-request run.
 4. Enable **Block force pushes** and **Restrict deletions**. Leave bypass actors empty unless you want a specific maintainer to merge.
 
 For a simpler repository rule, use **Settings → Branches → Add classic branch protection rule**, enter `main`, and enable pull requests, approvals, status checks, force-push blocking, and deletion blocking. Only repository administrators can change these settings. Branch rulesets are the current GitHub approach. ([Rulesets API/docs](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets))
